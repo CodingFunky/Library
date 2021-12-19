@@ -34,15 +34,7 @@ let myLibrary = [
     read: true,
   }
 ];
-deleteBtns = document.querySelectorAll(".far")
-deleteBtns.forEach((btn) => {
-  btn.addEventListener('click', (e) => {
-    let book = btn.parentNode;
-    console.log(book);
-    console.log(btn);
-    library.removeChild(book);
-  })
-})
+
 function Book(title, author, pageCount, isRead) {
   // the constructor...
   this.title = title;
@@ -121,6 +113,11 @@ function buildBookCard(newBook) {
     isRead.style.color = 'red';
   }
   bookCard.append(title, author, pageCount, isRead, deleteBtn);
+  deleteBtn.addEventListener('click', () => {
+    let book = deleteBtn.parentNode;
+    console.log(book);
+    library.removeChild(book);
+  })
 }
 function addBookToLibrary() {
   // do stuff here
@@ -157,13 +154,13 @@ readStatusBtn.forEach((btn) => {
   })
 })
 
-// deleteBtns = document.querySelectorAll(".far")
-// deleteBtns.forEach((btn) => {
-//   btn.addEventListener('click', (e) => {
-//     let book = btn.parentNode;
-//     console.log(book);
-//     console.log(btn);
-//     library.removeChild(book);
-//   })
-// })
+deleteBtns = document.querySelectorAll(".far")
+deleteBtns.forEach((btn) => {
+  btn.addEventListener('click', (e) => {
+    let book = btn.parentNode;
+    console.log(book);
+    console.log(btn);
+    library.removeChild(book);
+  })
+})
 
