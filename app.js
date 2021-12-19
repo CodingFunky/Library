@@ -102,7 +102,7 @@ function buildBookCard(newBook) {
   deleteBtn.classList.add('fa-trash-alt')
   deleteBtn.classList.add('fa-2x')
   deleteBtn.classList.add('btn')
-  title.textContent = ('\"' + newBook.title + "\"")
+  title.textContent = (newBook.title)
   author.textContent = (newBook.author);
   pageCount.textContent = (newBook.pageCount + ' pages');
   isRead.textContent = newBook.read;
@@ -118,7 +118,6 @@ function buildBookCard(newBook) {
   bookCard.append(title, author, pageCount, isRead, deleteBtn);
   deleteBtn.addEventListener('click', () => {
     let book = deleteBtn.parentNode;
-    console.log(book);
     library.removeChild(book);
   })
 }
@@ -133,6 +132,7 @@ function addBookToLibrary() {
 function updateLibrary(newLibrary){
 
 }
+// This prints the library already in place
 myLibrary.forEach(book => {
   buildBookCard(book);
   library.appendChild(bookCard);
@@ -156,8 +156,7 @@ readStatusBtn.forEach((btn) => {
     
   })
 })
-
-deleteBtns = document.querySelectorAll(".far")
+deleteBtns = document.querySelectorAll(".fa-trash-alt")
 deleteBtns.forEach((btn) => {
   btn.addEventListener('click', (e) => {
     let book = btn.parentNode;
