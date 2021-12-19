@@ -58,8 +58,6 @@ Book.prototype.changeRead = function() {
     this.read = true;
   }
 }
-
-
 function getBookInfo() {
     let title = newTitle.value;
     let author = newAuthor.value;
@@ -68,26 +66,21 @@ function getBookInfo() {
     // let bookPages = newPageCount;
     return new Book(title, author, pageCount, isRead);
 }
-// function updateReadStatus(book, isNew ) {  
-//   if (isNew) {
-
-//   }
-//   else {
-//     if (book.read) {
-//       isRead.textContent = 'Not Red';
-//       isRead.style.color = 'red';
-//     }else {
-//       isRead.textContent = 'Read';
-//       isRead.style.color = 'blue';
-//     }
-//   }
-// }
+function toggleRead(book) {  
+  // if (book.read) {
+  //   book.read = false;
+  // }else {
+  //   book.read = true;
+  // }
+  book.changeRead();
+  drawLibrary();
+}
 function buildBookCard(newBook) {
   bookCard = document.createElement('div');
   bookCard.classList.add('bookCard');
   bookCard.setAttribute("data-attribute", bookNum)
   bookNum++;
-
+  
   title = document.createElement('h3');
   title.classList.add('bookTitle');
   author = document.createElement('h3');
@@ -95,6 +88,7 @@ function buildBookCard(newBook) {
   pageCount = document.createElement('h3');
   pageCount.classList.add("bookPageCount");
   isRead = document.createElement('button');
+
   isRead.classList.add('btn');
   isRead.classList.add('read');
   deleteBtn = document.createElement('i');
@@ -102,11 +96,12 @@ function buildBookCard(newBook) {
   deleteBtn.classList.add('fa-trash-alt')
   deleteBtn.classList.add('fa-2x')
   deleteBtn.classList.add('btn')
+
   title.textContent = (newBook.title)
   author.textContent = (newBook.author);
   pageCount.textContent = (newBook.pageCount + ' pages');
   isRead.textContent = newBook.read;
-  // updateReadStatus(newBook);
+  // toggleRead(newBook);
   if (newBook.read) {
     isRead.textContent = 'Read';
     isRead.style.backgroundColor = '#99E1D9';
@@ -129,15 +124,14 @@ function addBookToLibrary() {
   library.appendChild(bookCard);
 }
 
-function updateLibrary(newLibrary){
-
+function drawLibrary(){
+  myLibrary.forEach(book => {
+    buildBookCard(book);
+    library.appendChild(bookCard);
+  });
 }
 // This prints the library already in place
-myLibrary.forEach(book => {
-  buildBookCard(book);
-  library.appendChild(bookCard);
-});
-
+drawLibrary();
 addBtn.addEventListener("click", (e) => {
   submitCard.classList.add('active')
 })
@@ -145,14 +139,21 @@ addBtn.addEventListener("click", (e) => {
 submitBtn.addEventListener('click', () => {
   addBookToLibrary();
   submitCard.classList.remove('active');
+  // clearSubmitForms();
 })
-
 readStatusBtn = document.querySelectorAll('.read');
 readStatusBtn.forEach((btn) => {
   btn.addEventListener('click', () => {
-    reference = btn.parentNode.getAttribute('date-attribute');
-    // updateReadStatus(btn, false);
-    console.log(reference);
+    ref = btn.parentNode;
+    ref = ref.getAttribute('data-attribute');
+    console.log(myLibrary[ref].read)
+    // toggleRead(myLibrary[ref]);
+    if (myLibrary[ref].read) {
+      myLibrary[ref].read = false;
+    }
+    else {
+      myLibrary[ref].read = true;
+    }
     
   })
 })
