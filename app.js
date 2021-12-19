@@ -7,7 +7,7 @@ const readStatus = document.querySelector('#isRead')
 const addBtn = document.querySelector('#add')
 const submitCard = document.querySelector('.submitCard')
 const submitBtn = document.querySelector('#submit')
-
+let bookNum = 0;
 let myLibrary = [
   {
     title: "Harry Pooper",
@@ -27,8 +27,22 @@ let myLibrary = [
     pageCount: 80085,
     read: false,
   },
+  {
+    title: 'World War Pee',
+    author: 'Min Brooks',
+    pageCount: 23,
+    read: true,
+  }
 ];
-
+deleteBtns = document.querySelectorAll(".far")
+deleteBtns.forEach((btn) => {
+  btn.addEventListener('click', (e) => {
+    let book = btn.parentNode;
+    console.log(book);
+    console.log(btn);
+    library.removeChild(book);
+  })
+})
 function Book(title, author, pageCount, isRead) {
   // the constructor...
   this.title = title;
@@ -45,6 +59,15 @@ Book.prototype.edit = function() {
   // get new info from user and update the book card
 }
 
+Book.prototype.changeRead = function() {
+  if (this.read) {
+    this.read = false;
+  } else {
+    this.read = true;
+  }
+}
+
+
 function getBookInfo() {
     let title = newTitle.value;
     let author = newAuthor.value;
@@ -53,15 +76,51 @@ function getBookInfo() {
     // let bookPages = newPageCount;
     return new Book(title, author, pageCount, isRead);
 }
+// function updateReadStatus(book, isNew ) {  
+//   if (isNew) {
+
+//   }
+//   else {
+//     if (book.read) {
+//       isRead.textContent = 'Not Red';
+//       isRead.style.color = 'red';
+//     }else {
+//       isRead.textContent = 'Read';
+//       isRead.style.color = 'blue';
+//     }
+//   }
+// }
 function buildBookCard(newBook) {
   bookCard = document.createElement('div');
   bookCard.classList.add('bookCard');
+  bookCard.setAttribute("data-attribute", bookNum)
+  bookNum++;
+
   title = document.createElement('h3');
   author = document.createElement('h3');
+  pageCount = document.createElement('h3');
+  isRead = document.createElement('button');
+  isRead.classList.add('btn');
+  isRead.classList.add('read');
+  deleteBtn = document.createElement('i');
+  deleteBtn.classList.add('far');
+  deleteBtn.classList.add('fa-trash-alt')
+  deleteBtn.classList.add('fa-2x')
+  deleteBtn.classList.add('btn')
   title.textContent = ('\"' + newBook.title + "\"")
   author.textContent = (newBook.author);
-  bookCard.appendChild(title);
-  bookCard.appendChild(author);
+  pageCount.textContent = (newBook.pageCount + ' pages');
+  isRead.textContent = newBook.read;
+  // updateReadStatus(newBook);
+  if (newBook.read) {
+    isRead.textContent = 'Read';
+    isRead.style.color = 'blue';
+  }
+  else {
+    isRead.textContent = 'Not Read';
+    isRead.style.color = 'red';
+  }
+  bookCard.append(title, author, pageCount, isRead, deleteBtn);
 }
 function addBookToLibrary() {
   // do stuff here
@@ -75,15 +134,8 @@ function updateLibrary(newLibrary){
 
 }
 myLibrary.forEach(book => {
-  bookCard = document.createElement('div');
-  bookCard.classList.add('bookCard');
+  buildBookCard(book);
   library.appendChild(bookCard);
-  title = document.createElement('h3');
-  author = document.createElement('h3');
-  title.textContent = ('\"' + book.title + "\"")
-  author.textContent = (book.author);
-  bookCard.appendChild(title);
-  bookCard.appendChild(author);
 });
 
 addBtn.addEventListener("click", (e) => {
@@ -95,5 +147,23 @@ submitBtn.addEventListener('click', () => {
   submitCard.classList.remove('active');
 })
 
-console.log(myLibrary);
-console.log(newTitle.value)
+readStatusBtn = document.querySelectorAll('.read');
+readStatusBtn.forEach((btn) => {
+  btn.addEventListener('click', () => {
+    reference = btn.parentNode.getAttribute('date-attribute');
+    // updateReadStatus(btn, false);
+    console.log(reference);
+    
+  })
+})
+
+// deleteBtns = document.querySelectorAll(".far")
+// deleteBtns.forEach((btn) => {
+//   btn.addEventListener('click', (e) => {
+//     let book = btn.parentNode;
+//     console.log(book);
+//     console.log(btn);
+//     library.removeChild(book);
+//   })
+// })
+
