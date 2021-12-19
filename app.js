@@ -111,10 +111,6 @@ function buildBookCard(newBook) {
     isRead.style.backgroundColor = '#F7567C';
   }
   bookCard.append(title, author, pageCount, isRead, deleteBtn);
-  deleteBtn.addEventListener('click', () => {
-    let book = deleteBtn.parentNode;
-    library.removeChild(book);
-  })
 }
 function addBookToLibrary() {
   // do stuff here
@@ -122,6 +118,13 @@ function addBookToLibrary() {
   buildBookCard(newBook);
   myLibrary.push(newBook);
   library.appendChild(bookCard);
+  deleteBtns = document.querySelectorAll(".fa-trash-alt")
+  deleteBtns.forEach((btn) => {
+    btn.addEventListener('click', (e) => {
+      let book = btn.parentNode;
+      library.removeChild(book);
+    })
+  })
 }
 
 function drawLibrary(){
