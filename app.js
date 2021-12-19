@@ -89,8 +89,11 @@ function buildBookCard(newBook) {
   bookNum++;
 
   title = document.createElement('h3');
+  title.classList.add('bookTitle');
   author = document.createElement('h3');
+  author.classList.add('bookAuthor');
   pageCount = document.createElement('h3');
+  pageCount.classList.add("bookPageCount");
   isRead = document.createElement('button');
   isRead.classList.add('btn');
   isRead.classList.add('read');
@@ -106,11 +109,11 @@ function buildBookCard(newBook) {
   // updateReadStatus(newBook);
   if (newBook.read) {
     isRead.textContent = 'Read';
-    isRead.style.color = 'blue';
+    isRead.style.backgroundColor = '#99E1D9';
   }
   else {
     isRead.textContent = 'Not Read';
-    isRead.style.color = 'red';
+    isRead.style.backgroundColor = '#F7567C';
   }
   bookCard.append(title, author, pageCount, isRead, deleteBtn);
   deleteBtn.addEventListener('click', () => {
