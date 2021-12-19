@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="app.js" defer></script>
+</head>
+</head>
+<body>
+    <header><h1>Library</h1> <button class="btn login">Log In</button></header>
+    <div class="hero">
+        <div class="container">
+            <input type="submit" value="Add Book" id="add" class="btn add">
+            <div class="library"></div>
+        </div>
+    </div>
+    <footer>Copyleft 2069</footer>
+    <div class="submitCard">
+        <h1 class="cardHeader">Add new book</h1>
+        <div class="info">
+             <input class='input' id="title" type="text" placeholder='Title' required>
+        </div>
+        <div class="info">
+            <input class="input" id='author' type="text" placeholder="Author" required>
+        </div>
+        <div class="info">
+            <input class="input" id='pageCount' type="text" placeholder="Number of Pages" required>
+        </div>
+        <div class="isRead">
+            <label for="is-read">Have you read it?</label>
+            <input class="checkbox" type="checkbox" id="isRead" />
+        </div>
+        <div class="bottomRow">
+            <button class="btn submit" id="submit">Add</button>
+        </div>
+    </div>
+
+</body>
+</html>
