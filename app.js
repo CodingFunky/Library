@@ -8,6 +8,7 @@ const addBtn = document.querySelector('#add')
 const submitCard = document.querySelector('.submitCard')
 const submitBtn = document.querySelector('#submit')
 let bookNum = 0;
+
 let myLibrary = [
   {
     title: "Harry Pooper",
@@ -34,9 +35,7 @@ let myLibrary = [
     read: true,
   }
 ];
-
 function Book(title, author, pageCount, isRead) {
-  // the constructor...
   this.title = title;
   this.author = author;
   this.pageCount = pageCount;
@@ -58,6 +57,55 @@ Book.prototype.changeRead = function() {
     this.read = true;
   }
 }
+
+Book.prototype.updateAttribute = function() {
+  this.setAttribute("data-attribute", );
+}
+
+// This prints the library already in place
+drawLibrary();
+
+// Event listeners
+addBtn.addEventListener("click", (e) => {
+  submitCard.classList.add('active')
+})
+
+submitBtn.addEventListener('click', () => {
+  addBookToLibrary();
+  submitCard.classList.remove('active');
+  clearSubmitForms();
+})
+readStatusBtn = document.querySelectorAll('.read');
+readStatusBtn.forEach((btn) => {
+  btn.addEventListener('click', () => {
+    ref = btn.parentNode;
+    ref = ref.getAttribute('data-attribute');
+    console.log(myLibrary[ref].read)
+    // toggleRead(myLibrary[ref]);
+    if (myLibrary[ref].read) {
+      myLibrary[ref].read = false;
+    }
+    else {
+      myLibrary[ref].read = true;
+    }
+    
+  })
+})
+deleteBtns = document.querySelectorAll(".fa-trash-alt")
+deleteBtns.forEach((btn) => {
+  btn.addEventListener('click', (e) => {
+    let book = btn.parentNode;
+    // console.log(book);
+    // console.log(btn);
+    library.removeChild(book);
+    ref = btn.parentNode;
+    ref = ref.getAttribute('data-attribute');
+    console.log(myLibrary);
+    myLibrary.splice(ref, 1);
+    console.log(myLibrary);
+  })
+})
+// Functions
 function getBookInfo() {
     let title = newTitle.value;
     let author = newAuthor.value;
@@ -113,7 +161,6 @@ function buildBookCard(newBook) {
   bookCard.append(title, author, pageCount, isRead, deleteBtn);
 }
 function addBookToLibrary() {
-  // do stuff here
   let newBook = getBookInfo()
   buildBookCard(newBook);
   myLibrary.push(newBook);
@@ -133,40 +180,10 @@ function drawLibrary(){
     library.appendChild(bookCard);
   });
 }
-// This prints the library already in place
-drawLibrary();
-addBtn.addEventListener("click", (e) => {
-  submitCard.classList.add('active')
-})
 
-submitBtn.addEventListener('click', () => {
-  addBookToLibrary();
-  submitCard.classList.remove('active');
-  // clearSubmitForms();
-})
-readStatusBtn = document.querySelectorAll('.read');
-readStatusBtn.forEach((btn) => {
-  btn.addEventListener('click', () => {
-    ref = btn.parentNode;
-    ref = ref.getAttribute('data-attribute');
-    console.log(myLibrary[ref].read)
-    // toggleRead(myLibrary[ref]);
-    if (myLibrary[ref].read) {
-      myLibrary[ref].read = false;
-    }
-    else {
-      myLibrary[ref].read = true;
-    }
-    
-  })
-})
-deleteBtns = document.querySelectorAll(".fa-trash-alt")
-deleteBtns.forEach((btn) => {
-  btn.addEventListener('click', (e) => {
-    let book = btn.parentNode;
-    console.log(book);
-    console.log(btn);
-    library.removeChild(book);
-  })
-})
-
+function clearSubmitForms() {
+  newTitle.value = '';
+  newAuthor.value = '';
+  newPageCount.value = '';
+  readStatus.checked = '';
+}
