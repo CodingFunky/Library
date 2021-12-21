@@ -95,8 +95,6 @@ deleteBtns = document.querySelectorAll(".fa-trash-alt")
 deleteBtns.forEach((btn) => {
   btn.addEventListener('click', (e) => {
     let book = btn.parentNode;
-    // console.log(book);
-    // console.log(btn);
     library.removeChild(book);
     ref = btn.parentNode;
     ref = ref.getAttribute('data-attribute');
@@ -111,7 +109,6 @@ function getBookInfo() {
     let author = newAuthor.value;
     let pageCount = newPageCount.value;
     let isRead = readStatus.checked;
-    // let bookPages = newPageCount;
     return new Book(title, author, pageCount, isRead);
 }
 function toggleRead(book) {  
@@ -173,14 +170,12 @@ function addBookToLibrary() {
     })
   })
 }
-
 function drawLibrary(){
   myLibrary.forEach(book => {
     buildBookCard(book);
     library.appendChild(bookCard);
   });
 }
-
 function clearSubmitForms() {
   newTitle.value = '';
   newAuthor.value = '';
