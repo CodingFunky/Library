@@ -1,4 +1,5 @@
 body {
+    background-color: #EBF2FA;
     margin: 0;
     display: flex;
     flex-direction: column;
@@ -6,6 +7,12 @@ body {
     /* box-shadow: ; */
     /* align-items: ; */
 }
+#page-container {
+    z-index: 1;
+    position: relative;
+    min-height: 100vh;
+    /* opacity: 0.2; */
+  }
 .btn {
     background-color: #05668D;
     align-self: center;
@@ -41,11 +48,16 @@ header {
     background-color: #EBF2FA;
     display: flex;
     /* justify-content: space-between; */
+    padding-bottom: 2.5rem; 
 }
 .container {
     display: flex;
     flex-direction: column;
     width: 100%;
+}
+#containerHeader {
+    position: relative;
+    left: 35%;    
 }
 .btn.add {
     /* background-color: #306bac; */
@@ -61,7 +73,7 @@ header {
     top: 105%;
     left: 35%;
     font-size: larger;
-    z-index: 1;
+    z-index: 2;
     padding: 20px 50px 50px 50px;
     transform: translate(-50%, -50%) scale(0);
     background-color: #306bac;
@@ -114,7 +126,11 @@ header {
     /* padding: 15px; */
     text-align: center;
     /* gap: 20px; */
-    min-width: 25%;
+    /* min-width: 25%; */
+    /* max-width: 5%; */
+    flex-basis: 250px;
+    flex-grow: 0;
+    flex-shrink: 1;
     height: 250px;
 }
 h3 {
@@ -144,7 +160,13 @@ h3 {
     transform: scale(1.01);
 }
 footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     background-color: #141B41;
     color: white;
-    text-align: center;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 2.5em;
 }
