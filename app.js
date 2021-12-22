@@ -8,6 +8,7 @@ const addBtn = document.querySelector('#add');
 const submitCard = document.querySelector('.submitCard');
 const submitBtn = document.querySelector('#submit');
 const filter = document.getElementById('filter');
+const overlay = document.querySelector('.overlay')
 
 let bookNum = 0;
 let myLibrary = [];
@@ -39,17 +40,23 @@ Book.prototype.updateAttribute = function() {
 // Event listeners
 addBtn.addEventListener("click", (e) => {
   submitCard.classList.add('active');
+  overlay.classList.add('active');
 })
 
-submitBtn.addEventListener('click', () => {
-  addBookToLibrary();
+submitBtn.addEventListener('click', (e) => {
+  addBookToLibrary(e);
   submitCard.classList.remove('active');
+  overlay.classList.remove('active')
   clearSubmitForms();
 })
 
 library.addEventListener('click', removeItem);
 library.addEventListener('click', toggleRead);
 filter.addEventListener('keyup', filterItems);
+overlay.onclick = function closeOverlay() {
+  submitCard.classList.remove('active');
+  overlay.classList.remove('active');
+}
 
 function updateAttritube(ref) {
   let books = library.getElementsByTagName('div');
@@ -94,6 +101,7 @@ function removeItem(e) {
 //   });
 // }
 function addBookToLibrary() {
+  // e.preventDefault()
   let newBook = getBookInfo();
   let bookCard = buildBookCard(newBook);
   myLibrary.push(newBook);
