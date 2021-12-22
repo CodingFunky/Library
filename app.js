@@ -53,10 +53,7 @@ filter.addEventListener('keyup', filterItems);
 
 function updateAttritube(ref) {
   let books = library.getElementsByTagName('div');
-  console.log(books);
   Array.from(books).forEach(book => {
-    console.log(book);
-    console.log(book.firstChild.textContent)
     let indexNum = myLibrary.indexOf(ref);
     if (book.getAttribute('data-attribute') <= indexNum) {
 
