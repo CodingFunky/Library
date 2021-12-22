@@ -25,18 +25,18 @@ Book.prototype.edit = function() {
 Book.prototype.changeRead = function(readBtn) {
   if (this.read) {
     this.read = false;
-    readBtn.style.backgroundColor = '#F7567C';
+    readBtn.classList.remove('blue');
+    readBtn.classList.add('red');
+    // readBtn.style.backgroundColor = '#F7567C';
     readBtn.textContent = 'Not Read';
   } else {
     this.read = true;
-    readBtn.style.backgroundColor = '#99E1D9';
+    readBtn.classList.remove('red');
+    readBtn.classList.add('blue')
+    // readBtn.style.backgroundColor = '#99E1D9';
     readBtn.textContent = 'Read';
   }
 }
-Book.prototype.updateAttribute = function() {
-  this.setAttribute("data-attribute", );
-}
-
 // Event listeners
 addBtn.addEventListener("click", (e) => {
   submitCard.classList.add('active');
@@ -130,8 +130,8 @@ function buildBookCard(book) {
     let pageCount = document.createElement('h3');
     pageCount.classList.add("bookPageCount");
 
-    let isRead = document.createElement('button');
-    isRead.classList.add('btn', 'read');
+    let readBtn = document.createElement('button');
+    readBtn.classList.add('btn', 'read');
 
     let deleteBtn = document.createElement('i');
     deleteBtn.classList.add('far', 'fa-trash-alt', "fa-2x", 'btn');
@@ -140,19 +140,19 @@ function buildBookCard(book) {
     title.textContent = (book.title);
     author.textContent = (book.author);
     pageCount.textContent = (book.pageCount + ' pages');
-    isRead.textContent = book.read;
+    readBtn.textContent = book.read;
 
     // setReadStatus();
     if (book.read) {
-      isRead.textContent = 'Read';
-      isRead.style.backgroundColor = '#99E1D9';
+      readBtn.classList.add('blue');
+      readBtn.textContent = 'Read';
     }
     else {
-      isRead.textContent = 'Not Read';
-      isRead.style.backgroundColor = '#F7567C';
+      readBtn.classList.add('red')
+      readBtn.textContent = 'Not Read';
     }
     
-    bookCard.append(title, author, pageCount, isRead, deleteBtn);
+    bookCard.append(title, author, pageCount, readBtn, deleteBtn);
     return bookCard;
   }
   function getBookNum() {

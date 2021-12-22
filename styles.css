@@ -142,11 +142,15 @@ h3 {
 .bookTitle {
     background-color: lightgray;
 }
-.bookPageCount {
-}
 .read {
     margin-bottom: 12px;
     margin-top: 5px;
+}
+.btn.read.red {
+    background-color: #F7567C;
+}
+.btn.read.blue {
+    background-color: #99E1D9;
 }
 .far {
     /* background-color: #6F9CEB; */
