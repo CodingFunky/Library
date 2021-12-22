@@ -2,13 +2,14 @@ const container = document.querySelector('.container');
 const library = document.querySelector('.library')
 const newTitle = document.querySelector('#title');
 const newAuthor = document.querySelector('#author');
-const newPageCount = document.querySelector('#pageCount')
-const readStatus = document.querySelector('#isRead')
-const addBtn = document.querySelector('#add')
-const submitCard = document.querySelector('.submitCard')
-const submitBtn = document.querySelector('#submit')
-let bookNum = 0;
+const newPageCount = document.querySelector('#pageCount');
+const readStatus = document.querySelector('#isRead');
+const addBtn = document.querySelector('#add');
+const submitCard = document.querySelector('.submitCard');
+const submitBtn = document.querySelector('#submit');
+const filter = document.getElementById('filter');
 
+let bookNum = 0;
 let myLibrary = [];
 
 function Book(title, author, pageCount, isRead) {
@@ -37,7 +38,7 @@ Book.prototype.updateAttribute = function() {
 
 // Event listeners
 addBtn.addEventListener("click", (e) => {
-  submitCard.classList.add('active')
+  submitCard.classList.add('active');
 })
 
 submitBtn.addEventListener('click', () => {
@@ -48,6 +49,7 @@ submitBtn.addEventListener('click', () => {
 
 library.addEventListener('click', removeItem);
 library.addEventListener('click', toggleRead);
+filter.addEventListener('keyup', filterItems);
 
 function toggleRead(e) {  
   if(e.target.classList.contains('read')) {
@@ -58,26 +60,26 @@ function toggleRead(e) {
     book.changeRead(readBtn);
   }
 }
-
 function removeItem(e) {
   if(e.target.classList.contains('fa-trash-alt')) {
     let book = e.target.parentElement;
     library.removeChild(book);
     ref = book.getAttribute('data-attribute');
     myLibrary.splice(ref, 1);
+    
   }
 }
 // print books already there
-function drawLibrary(){
-  myLibrary.forEach(book => {
-    let bookCard = buildBookCard(book);
-    bookCard.setAttribute("data-attribute", bookNum);
-    bookNum++;
-    library.appendChild(bookCard);
-  });
-}
+// function drawLibrary(){
+//   myLibrary.forEach(book => {
+//     let bookCard = buildBookCard(book);
+//     bookCard.setAttribute("data-attribute", bookNum);
+//     bookNum++;
+//     library.appendChild(bookCard);
+//   });
+// }
 function addBookToLibrary() {
-  let newBook = getBookInfo()
+  let newBook = getBookInfo();
   let bookCard = buildBookCard(newBook);
   myLibrary.push(newBook);
   library.appendChild(bookCard);
@@ -93,7 +95,7 @@ function buildBookCard(book) {
     // make book card
     let bookCard = document.createElement('div');
     bookCard.classList.add('bookCard');
-    bookCard.setAttribute("data-attribute", getBookNum())
+    bookCard.setAttribute("data-attribute", getBookNum());
     
     // make elements
     let title = document.createElement('h3');
@@ -112,7 +114,7 @@ function buildBookCard(book) {
     deleteBtn.classList.add('far', 'fa-trash-alt', "fa-2x", 'btn');
 
     // set values
-    title.textContent = (book.title)
+    title.textContent = (book.title);
     author.textContent = (book.author);
     pageCount.textContent = (book.pageCount + ' pages');
     isRead.textContent = book.read;
@@ -139,6 +141,17 @@ function clearSubmitForms() {
   newPageCount.value = '';
   readStatus.checked = '';
 }
-
+function filterItems(e) {
+  let text = e.target.value.toLowerCase();
+  let books = library.getElementsByTagName('div');
+  Array.from(books).forEach(function(book) {
+    let itemName = book.firstChild.textContent;
+    if(itemName.toLowerCase().indexOf(text) != -1) {
+      book.style.display = "flex";
+    } else {
+      book.style.display = 'none';
+    }
+  })
+}
 // // This prints the library already in place
-drawLibrary();
+// drawLibrary();
