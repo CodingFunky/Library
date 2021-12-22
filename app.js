@@ -51,6 +51,22 @@ library.addEventListener('click', removeItem);
 library.addEventListener('click', toggleRead);
 filter.addEventListener('keyup', filterItems);
 
+function updateAttritube(ref) {
+  let books = library.getElementsByTagName('div');
+  console.log(books);
+  Array.from(books).forEach(book => {
+    console.log(book);
+    console.log(book.firstChild.textContent)
+    let indexNum = myLibrary.indexOf(ref);
+    if (book.getAttribute('data-attribute') <= indexNum) {
+
+    }else {
+      let bookAttr = book.getAttribute('data-attribute');
+      bookAttr--;
+      book.setAttribute('data-attribute', bookAttr);
+    }
+  })
+}
 function toggleRead(e) {  
   if(e.target.classList.contains('read')) {
     let readBtn = e.target;
@@ -64,8 +80,10 @@ function removeItem(e) {
   if(e.target.classList.contains('fa-trash-alt')) {
     let book = e.target.parentElement;
     library.removeChild(book);
-    ref = book.getAttribute('data-attribute');
+    let ref = book.getAttribute('data-attribute');
     myLibrary.splice(ref, 1);
+    ref = myLibrary[ref];
+    updateAttritube(ref);
     
   }
 }
