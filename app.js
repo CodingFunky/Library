@@ -13,30 +13,32 @@ const overlay = document.querySelector('.overlay')
 let bookNum = 0;
 let myLibrary = [];
 
-function Book(title, author, pageCount, isRead) {
-  this.title = title;
-  this.author = author;
-  this.pageCount = pageCount;
-  this.read = isRead;
-}
-Book.prototype.edit = function() {
-  // get new info from user and update the book card
-}
-Book.prototype.changeRead = function(readBtn) {
-  if (this.read) {
-    this.read = false;
-    readBtn.classList.remove('blue');
-    readBtn.classList.add('red');
-    // readBtn.style.backgroundColor = '#F7567C';
-    readBtn.textContent = 'Not Read';
-  } else {
-    this.read = true;
-    readBtn.classList.remove('red');
-    readBtn.classList.add('blue')
-    // readBtn.style.backgroundColor = '#99E1D9';
-    readBtn.textContent = 'Read';
+class Book {
+  constructor(title, author, pageCount, isRead) {
+    this.title = title;
+    this.author = author;
+    this.pageCount = pageCount;
+    this.read = isRead;
+  }
+  edit() { 
+  }
+  changeRead(readBtn) {
+    if (this.read) {
+      this.read = false;
+      readBtn.classList.remove('blue');
+      readBtn.classList.add('red');
+      // readBtn.style.backgroundColor = '#F7567C';
+      readBtn.textContent = 'Not Read';
+    } else {
+      this.read = true;
+      readBtn.classList.remove('red');
+      readBtn.classList.add('blue')
+      // readBtn.style.backgroundColor = '#99E1D9';
+      readBtn.textContent = 'Read';
+    }
   }
 }
+
 // Event listeners
 addBtn.addEventListener("click", (e) => {
   submitCard.classList.add('active');
@@ -168,8 +170,8 @@ function filterItems(e) {
   let text = e.target.value.toLowerCase();
   let books = library.getElementsByTagName('div');
   Array.from(books).forEach(function(book) {
-    let itemName = book.firstChild.textContent;
-    if(itemName.toLowerCase().indexOf(text) != -1) {
+    let bookTitle = book.firstChild.textContent;
+    if(bookTitle.toLowerCase().indexOf(text) != -1) {
       book.style.display = "flex";
     } else {
       book.style.display = 'none';
