@@ -84,6 +84,10 @@ header {
     align-self: center;
     display: none;
 }
+.submitCard.active {
+    transform: translate(0%, -130%) scale(1);
+    display:flex;
+}
 .cardHeader {
     margin-bottom: 40px;
 }
@@ -92,10 +96,6 @@ header {
 }
 .btn.submit {
     margin-top: 20px;
-}
-.submitCard.active {
-    transform: translate(0%, -130%) scale(1);
-    display:flex;
 }
 .info {
     /* border: solid pink 1px; */
