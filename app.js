@@ -134,7 +134,7 @@ function buildBookCard(book) {
     readBtn.classList.add('btn', 'read');
 
     let deleteBtn = document.createElement('i');
-    deleteBtn.classList.add('far', 'fa-trash-alt', "fa-2x", 'btn');
+    deleteBtn.classList.add('fas', 'fa-trash-alt', "fa-1x", 'btn');
 
     // set values
     title.textContent = (book.title);
